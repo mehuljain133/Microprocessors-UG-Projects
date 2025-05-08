@@ -1,0 +1,102 @@
+;-----------------------------------------------------------
+; Advanced Microprocessor Architecture Example
+; This program demonstrates:
+; - CISC Architecture
+; - RISC Architecture
+; - Superscalar Architecture
+; - Multicore Architecture
+;-----------------------------------------------------------
+
+; Initialize the environment for the microprocessor simulation
+ORG 0x1000              ; Program starts at memory address 0x1000
+START:
+    MOV A, #0x00        ; Initialize accumulator A
+    MOV B, #0x00        ; Initialize accumulator B
+    MOV SP, #0x200      ; Initialize Stack Pointer to address 0x200
+
+; --- CISC Architecture ---
+; Complex Instruction Set Computing (CISC) executes multi-step instructions
+; CISC allows for more complex instructions with fewer instructions required.
+CISC_ARCHITECTURE:
+    ; Complex instruction that moves, adds, and stores in a single step
+    MOV A, [0x3000]     ; Load value from memory (0x3000)
+    ADD A, [0x4000]     ; Add value at address 0x4000 to accumulator
+    MOV [0x5000], A     ; Store result back to memory at address 0x5000
+    NOP                 ; No Operation (simulating a delay or other operation)
+    
+; --- RISC Architecture ---
+; Reduced Instruction Set Computing (RISC) uses simple, fast instructions
+; Each instruction is designed to perform one simple operation in one cycle.
+RISC_ARCHITECTURE:
+    ; Simple, fast instructions with less complexity
+    MOV A, [0x6000]     ; Load value from memory address 0x6000
+    MOV B, [0x7000]     ; Load value from memory address 0x7000
+    ADD A, B            ; Add the contents of A and B, store result in A
+    MOV [0x8000], A     ; Store the result into memory address 0x8000
+    NOP                 ; No Operation (can be used for pipelining or instruction delay)
+
+; --- Superscalar Architecture ---
+; Superscalar processors can execute more than one instruction per cycle.
+; Multiple pipelines allow parallel execution of instructions.
+SUPERSCALAR_ARCHITECTURE:
+    ; Two instructions are issued simultaneously
+    MOV A, [0x9000]     ; Load value from memory address 0x9000
+    MOV B, [0xA000]     ; Load value from memory address 0xA000
+    ADD A, B            ; Add values in A and B, result in A
+    MOV [0xB000], A     ; Store the result in memory at address 0xB000
+    MOV C, [0xC000]     ; Load another value into C (parallel execution)
+    SUB D, C            ; Subtract value of C from D in parallel
+    MOV [0xD000], D     ; Store the result in memory at 0xD000
+    
+; --- Multicore Architecture ---
+; A multicore processor has multiple processing units working in parallel.
+; Each core can independently execute a set of instructions.
+MULTICORE_ARCHITECTURE:
+    ; Core 1: Performs an addition operation
+    CORE1:
+        MOV A, [0xE000] ; Load value from memory address 0xE000
+        MOV B, [0xF000] ; Load value from memory address 0xF000
+        ADD A, B        ; Add the values in A and B, result in A
+        MOV [0x10000], A; Store result at memory address 0x10000
+
+    ; Core 2: Performs a multiplication operation (simulating parallel execution)
+    CORE2:
+        MOV A, [0x11000] ; Load value from memory address 0x11000
+        MOV B, [0x12000] ; Load value from memory address 0x12000
+        MUL A, B         ; Multiply values in A and B, result in A
+        MOV [0x13000], A ; Store result at memory address 0x13000
+
+    ; Core 3: Simulates handling of a task in parallel to other cores
+    CORE3:
+        MOV A, [0x14000] ; Load value from memory address 0x14000
+        MOV B, [0x15000] ; Load value from memory address 0x15000
+        MOV C, A         ; Copy A to C
+        ADD C, B         ; Add B to C
+        MOV [0x16000], C ; Store result in memory address 0x16000
+
+    ; The processor operates in parallel, with each core executing a different task
+
+; --- End of Program ---
+END:
+    HLT                 ; Halt execution of the program
+
+;-----------------------------------------------------------
+; Explanation:
+; 1. **CISC (Complex Instruction Set Computing)**:
+;    - CISC architecture uses a larger, more complex instruction set.
+;    - Instructions are capable of performing multiple tasks in a single instruction (e.g., moving, adding, storing).
+;    - Code shows a single complex instruction that loads, adds, and stores in one step.
+;  
+; 2. **RISC (Reduced Instruction Set Computing)**:
+;    - RISC architecture uses a small, simple set of instructions.
+;    - Each instruction is executed in one cycle, providing a more predictable performance.
+;    - Code shows simple instructions, with each instruction performing a specific task (load, add, store).
+;  
+; 3. **Superscalar Architecture**:
+;    - Superscalar processors can execute multiple instructions per cycle using parallel pipelines.
+;    - The code demonstrates two instructions executing in parallel (load, add, subtract).
+;  
+; 4. **Multicore Architecture**:
+;    - Multicore processors have multiple cores, each capable of independently executing instructions.
+;    - The code demonstrates parallel execution with each core handling a different task (addition, multiplication, etc.).
+;-----------------------------------------------------------
